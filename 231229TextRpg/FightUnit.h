@@ -16,6 +16,10 @@ public:
 	{
 		return MinAtt;
 	}
+	inline int GetMaxAtt() const
+	{
+		return MaxAtt;
+	}
 
 	virtual int GetRandomAtt();
 
@@ -28,6 +32,10 @@ public:
 	void DamageLogic(FightUnit& _Unit);
 	void DamageRender();
 
+	// Set
+	void SetMinAtt(int _NewAtt);
+	void SetMaxAtt(int _NewAtt);
+	void SetMaxHp(int _NewHp);
 protected:
 	int CurDamage = 0;
 

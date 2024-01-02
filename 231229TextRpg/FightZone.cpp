@@ -51,7 +51,57 @@ bool FightZone::FightLogic(FightUnit& _First, FightUnit& _Second, FightUnit& _To
 
 void FightZone::In(Player& _Player)
 {
-	NewMonster.AddGold(9000);
+	//초급 중급 고급 사냥터 고르기
+	_Player.StatusRender();
+	printf_s("어디로 가시겠습니다.\n");
+	printf_s("1. 초급 사냥터.\n");
+	printf_s("2. 중급 사냥터.\n");
+	printf_s("3. 고급 사냥터.\n");
+	printf_s("4. 나간다.\n");
+	int Select = _getch();
+
+	system("cls");
+
+	switch (Select)
+	{
+	case '1':
+	{
+		// 초급
+		NewMonster.SetMinAtt(5);
+		NewMonster.SetMaxAtt(15);
+		NewMonster.SetMaxHp(100);
+		NewMonster.Heal();
+		NewMonster.AddGold(8000);
+		break;
+	}
+	case '2':
+	{
+		// 중급
+		NewMonster.SetMinAtt(10);
+		NewMonster.SetMaxAtt(20);
+		NewMonster.SetMaxHp(200);
+		NewMonster.Heal();
+		NewMonster.AddGold(11000);
+		break; 
+	}
+	case '3':
+	{
+		// 고급
+		NewMonster.SetMinAtt(20);
+		NewMonster.SetMaxAtt(40);
+		NewMonster.SetMaxHp(300);
+		NewMonster.Heal();
+		NewMonster.AddGold(13000);
+		break;
+	}
+	case '4':
+		return;
+	default:
+		break;
+	}
+
+	system("cls");
+
 	while (true)
 	{
 		_Player.StatusRender();

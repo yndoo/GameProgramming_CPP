@@ -40,3 +40,14 @@ void FightUnit::DamageRender()
 {
 	printf_s("%s 가 %d의 공격력으로 공격했습니다.\n", Name, CurDamage);
 }
+
+void FightUnit::SetMinAtt(int _NewAtt) {
+	MinAtt = _NewAtt;
+}
+
+void FightUnit::SetMaxAtt(int _NewAtt) {
+	MaxAtt = _NewAtt;
+}
+void FightUnit::SetMaxHp(int _NewHp) {
+	MaxHp = _NewHp;
+}
