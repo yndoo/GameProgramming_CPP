@@ -20,8 +20,22 @@ public:
 	// 절대로 사라지지 않아야 하면 => 값형
 	// 지금은 동적할당을 배우지 않았기 때문에 
 	Weapon Weapon;
+	
+	int GetTotalExp();
+	int GetLevelUpExp();
 
+	void SetLevel(int _level);
+	void SetTotalExp(int _exp);
+	void SetLevelUpExp(int _exp);
+
+	//void FightStart(FightUnit& _Other) override;
+	void FightEnd(FightUnit& _Other) override;
+	void StatusRenderStart() override;
 protected:
 	int GetRandomAtt() override;
+private:
+	int Level = 1;
+	int TotalExp = 0;
+	int LevelUpExp = 1000; // 여기에 도달하면 레벨업한다.
 };
 

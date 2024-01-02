@@ -8,6 +8,9 @@ public:
 	int GetGold();
 	void AddGold(int _Gold);
 	void SubGold(int _Gold);
+	virtual void StatusRenderStart();
+	virtual void StatusRenderBase();
+	virtual void StatusRenderEnd();
 protected:
 	int Hp = 100;
 	int MaxHp = 100;

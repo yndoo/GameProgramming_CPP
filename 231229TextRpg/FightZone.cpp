@@ -51,6 +51,9 @@ bool FightZone::FightLogic(FightUnit& _First, FightUnit& _Second, FightUnit& _To
 
 void FightZone::In(Player& _Player)
 {
+	NewMonster.FightStart(_Player);
+	//_Player.FightStart(NewMonster); 플레이어는 Start할 때 할 게 없음.
+
 	//초급 중급 고급 사냥터 고르기
 	_Player.StatusRender();
 	printf_s("어디로 가시겠습니다.\n");
@@ -128,10 +131,9 @@ void FightZone::In(Player& _Player)
 			{
 				NewMonster.Heal();
 				if (!_Player.IsDeath()) { // Player가 이긴거라면 골드를 지급.
-					int MonsterGold = NewMonster.GetGold();
-					printf("%s가 %d의 골드를 얻었습니다.\n", _Player.GetName(), MonsterGold);
-					_Player.AddGold(MonsterGold);
-					_getch();
+					NewMonster.FightEnd(_Player);
+					_Player.FightEnd(NewMonster);
+					int Test = _getch();
 				}
 				return;
 			}

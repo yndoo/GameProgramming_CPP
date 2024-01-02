@@ -1,6 +1,20 @@
 #include "StatusUnit.h"
 #include <iostream>
 
+void StatusUnit::StatusRenderStart() {
+
+}
+
+void StatusUnit::StatusRenderBase() {
+	printf_s("공격력 %d~%d\n", MinAtt, MaxAtt);
+	printf_s("체력 %d/%d\n", Hp, MaxHp);
+	printf_s("소지금 %d\n", Gold);
+}
+
+void StatusUnit::StatusRenderEnd() {
+
+}
+
 void StatusUnit::StatusRender()
 {
 	// 메모리에 관련된 명확한 설명은 안한 상태지만
@@ -11,10 +25,14 @@ void StatusUnit::StatusRender()
 		printf_s("-");
 	}
 
+
 	printf_s("\n");
-	printf_s("공격력 %d~%d\n", MinAtt, MaxAtt);
-	printf_s("체력 %d\n", Hp);
-	printf_s("소지금 %d\n", Gold);
+	StatusRenderStart();
+	StatusRenderBase();
+	StatusRenderEnd();
+	//printf_s("공격력 %d~%d\n", MinAtt, MaxAtt);
+	//printf_s("체력 %d/%d\n", Hp, MaxHp);
+	//printf_s("소지금 %d\n", Gold);
 
 	for (int i = 0; i < 50; i++)
 	{
