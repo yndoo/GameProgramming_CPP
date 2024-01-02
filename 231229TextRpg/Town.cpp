@@ -89,7 +89,7 @@ void Town::Heal(Player& _Player)
     system("cls");
 
     while (true) {
-        _Player.Heal();
+        _Player.HpReset();
         _Player.StatusRender();
         printf_s("%s가 치료되었습니다.\n", _Player.GetName());
 

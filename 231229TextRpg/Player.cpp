@@ -32,22 +32,23 @@ void Player::SetLevelUpExp(int _exp) {
 }
 
 void Player::FightEnd(FightUnit& _Other) {
-	int Gold = _Other.GetGold();
-	printf("%s가 %d의 골드를 얻었습니다.\n", GetName(), Gold);
-	AddGold(Gold);
+	int MonsterGold = _Other.GetGold();
+	printf("%s가 %d의 골드를 얻었습니다.\n", GetName(), MonsterGold);
+	AddGold(MonsterGold);
 
 	// 경험치 얻기, 경험치 차면 레벨업
-	printf("%s가 %d의 경험치를 얻었습니다.\n", GetName(), GameExp);
-	TotalExp += GameExp;
-	if (TotalExp >= LevelUpExp) {
-		Level += TotalExp / LevelUpExp;
-		TotalExp -= (TotalExp / LevelUpExp) * LevelUpExp;
-		// LevelUpExp는 계속 그대로??
-		printf("%s가 %d.Lv로 레벨업 했습니다.\n", GetName(), Level);
+	printf("%s가 %d의 경험치를 얻었습니다.\n", GetName(), Exp);
+	TotalExp += Exp;
+
+	while (TotalExp >= LevelUpExp) {
+		Level ++;
+		TotalExp -= LevelUpExp;
 		SetMinAtt(GetMinAtt() + 10);
 		SetMaxAtt(GetMaxAtt() + 10);
 		SetMaxHp(GetMaxHP() + 50);
-		LevelUpExp += 1000;
+		LevelUpExp = Level * 1000;
+		HpReset();
+		printf("%s가 %d.Lv로 레벨업 했습니다.\n", GetName(), Level);
 	}
 }
 void Player::StatusRenderStart() {

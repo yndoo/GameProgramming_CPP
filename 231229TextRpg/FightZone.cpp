@@ -73,7 +73,7 @@ void FightZone::In(Player& _Player)
 		NewMonster.SetMinAtt(5);
 		NewMonster.SetMaxAtt(15);
 		NewMonster.SetMaxHp(100);
-		NewMonster.Heal();
+		NewMonster.HpReset();
 		NewMonster.AddGold(8000);
 		break;
 	}
@@ -83,7 +83,7 @@ void FightZone::In(Player& _Player)
 		NewMonster.SetMinAtt(10);
 		NewMonster.SetMaxAtt(20);
 		NewMonster.SetMaxHp(200);
-		NewMonster.Heal();
+		NewMonster.HpReset();
 		NewMonster.AddGold(11000);
 		break; 
 	}
@@ -93,7 +93,7 @@ void FightZone::In(Player& _Player)
 		NewMonster.SetMinAtt(20);
 		NewMonster.SetMaxAtt(40);
 		NewMonster.SetMaxHp(300);
-		NewMonster.Heal();
+		NewMonster.HpReset();
 		NewMonster.AddGold(13000);
 		break;
 	}
@@ -129,7 +129,7 @@ void FightZone::In(Player& _Player)
 
 			if (true == IsEnd) // 누군가 죽어서 싸움이 끝남.
 			{
-				NewMonster.Heal();
+				NewMonster.HpReset();
 				if (!_Player.IsDeath()) { // Player가 이긴거라면 골드를 지급.
 					NewMonster.FightEnd(_Player);
 					_Player.FightEnd(NewMonster);

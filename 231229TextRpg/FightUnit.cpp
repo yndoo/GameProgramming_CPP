@@ -22,7 +22,7 @@ int FightUnit::GetRandomSpeed() const
 int FightUnit::GetHp() const {
 	return Hp;
 }
-void FightUnit::Heal() {
+void FightUnit::HpReset() {
 	Hp = MaxHp;
 }
 
@@ -51,8 +51,4 @@ void FightUnit::SetMaxAtt(int _NewAtt) {
 }
 void FightUnit::SetMaxHp(int _NewHp) {
 	MaxHp = _NewHp;
-}
-
-void FightUnit::SetExp(int _exp) {
-	GameExp = _exp;
 }

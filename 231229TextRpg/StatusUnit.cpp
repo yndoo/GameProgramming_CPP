@@ -52,3 +52,12 @@ void StatusUnit::SubGold(int _Gold) {
 		Gold -= _Gold;
 	}
 }
+
+int StatusUnit::RandomValue(int _Min, int _Max) {
+	int RandomValue = rand() % (_Max - _Min) + _Min;
+	return RandomValue;
+}
+
+void StatusUnit::SetExp(int _Exp) {
+	Exp = _Exp;
+}

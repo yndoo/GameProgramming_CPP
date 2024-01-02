@@ -2,8 +2,8 @@
 #include <iostream>
 
 void Monster::FightStart(FightUnit& _Other) {
-	Heal();
-	AddGold(10000);
+	HpReset();
+	AddGold(RandomValue(5000,10000)); //랜덤골드
 }
 
 void Monster::FightEnd(FightUnit& _Other) {
@@ -11,7 +11,9 @@ void Monster::FightEnd(FightUnit& _Other) {
 
 	// 랜덤하게 경험치를 정해야 한다.
 	// 1000 ~ 2000 사이의 경험치 계산
-	int rExp = rand() % 1000 + 1000; // 1000 ~ 1999
-	_Other.SetExp(rExp); 
-	
+	_Other.SetExp(RandomValue(1000, 2000));
+}
+
+void Monster::StatusRenderEnd() {
+
 }
