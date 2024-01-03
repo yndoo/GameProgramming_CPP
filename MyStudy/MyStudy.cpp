@@ -1,18 +1,62 @@
 ﻿#include <iostream>
 
-void Test() {
-	printf("AAAAA");
-}
-int Test2() {
-	return 10;
-}
+class FightUnit
+{
+public:
+    virtual void Damage()
+    {
 
-int main() {
-	// 함수포인터 선언
-	// 리턴형태 (*변수명) ()
-	void(*Ptr)() = Test;
-	int(*Ptr2)() = Test2;
+    }
+    virtual void StatusRender() {
 
-	// 함수의 포인터이기 때문에 그 함수를 사용하는 방법 그대로 사용하게 된다.
-	Ptr();	// "AAAAA"
+    }
+};
+
+class Player : public FightUnit
+{
+public:
+    void Damage() override
+    {
+
+    }
+};
+enum Job {
+    Fighter,    //Job::Fighter = 0
+    Mage,
+};
+
+enum class DamageType {
+    PDamage,
+    MDamage
+};
+
+int main()
+{
+    int Size = sizeof(FightUnit);
+
+    int a = 0;
+
+    int Arr[10];
+    int* Ptr = Arr;
+    int* ArrPtr[10]; 
+    int Size2 = sizeof(ArrPtr); // 80
+
+    int** Ptr2D = ArrPtr;
+
+    int const* const* Ptrr = ArrPtr; // 8
+    int Size3 = sizeof(Ptrr);
+    int b = 0;
+
+    // 이렇게 사용 가능
+    Job Fighter = Job::Fighter;
+
+    // 형변환으로 확인
+    int FighterInt = Job::Fighter;  // 0
+    int MageInt = Job::Mage;        // 1
+
+    DamageType Type = DamageType::MDamage;
+
+    int Value = Type;
+
+    return 0;
 }
