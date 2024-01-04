@@ -1,62 +1,18 @@
 ﻿#include <iostream>
 
-class FightUnit
-{
-public:
-    virtual void Damage()
-    {
-
-    }
-    virtual void StatusRender() {
-
-    }
-};
-
-class Player : public FightUnit
-{
-public:
-    void Damage() override
-    {
-
-    }
-};
-enum Job {
-    Fighter,    //Job::Fighter = 0
-    Mage,
-};
-
-enum class DamageType {
-    PDamage,
-    MDamage
-};
-
 int main()
 {
-    int Size = sizeof(FightUnit);
+    _CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
+    {
+        int Value = 0;
+        int* Ptr = &Value;
+    }
+    {
+        int* Ptr = new int(0);
+    }
 
-    int a = 0;
-
-    int Arr[10];
-    int* Ptr = Arr;
-    int* ArrPtr[10]; 
-    int Size2 = sizeof(ArrPtr); // 80
-
-    int** Ptr2D = ArrPtr;
-
-    int const* const* Ptrr = ArrPtr; // 8
-    int Size3 = sizeof(Ptrr);
-    int b = 0;
-
-    // 이렇게 사용 가능
-    Job Fighter = Job::Fighter;
-
-    // 형변환으로 확인
-    int FighterInt = Job::Fighter;  // 0
-    int MageInt = Job::Mage;        // 1
-
-    DamageType Type = DamageType::MDamage;
-
-    int Value = Type;
-
+    new int(10);
+    //reinterpret_cast<int*>(operator new(sizeof(int))); // new int()의 본모습
+    
     return 0;
 }

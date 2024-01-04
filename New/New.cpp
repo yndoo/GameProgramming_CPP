@@ -30,7 +30,8 @@ int main()
 	Monster* NewMonster = new Monster[MonsterCount];
 	Monster* NewMonsterArr = NewMonster;
 
-	delete NewMonsterArr;
+	//delete NewMonsterArr;
+	delete NewMonster;
 
 }
 

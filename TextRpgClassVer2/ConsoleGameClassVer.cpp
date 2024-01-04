@@ -6,6 +6,7 @@
 
 int main()
 {
+
 	ConsoleScreen NewScreen = ConsoleScreen('*');
 	Galaga NewGalaga = Galaga();
 

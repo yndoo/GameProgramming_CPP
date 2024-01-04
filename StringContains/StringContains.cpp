@@ -50,6 +50,7 @@ void StringAdd(char* _Dest, const char* const _Left, const char* const _Right)
     for (int i = LeftCount; i < LeftCount + RightCount; i++) {
         _Dest[i] = _Right[i - LeftCount];
     }
+    _Dest[LeftCount + RightCount] = 0;
     return;
 }
 
@@ -75,17 +76,27 @@ int StringContains(const char* const _Dest, const char* const _Find)
 
 int main()
 {
+    // StringCount 함수는 strlen()함수와 같음
     {
         // 오른쪽과 왼쪽이 같은지?
         StringReturn NewReturn1 = StringEqual("AAA", "AAAA");       // NotEqual
         StringReturn NewReturn2 = StringEqual("ABC123", "ABC123");  // Equal
+        int NewReturn3 = strcmp("ABC123", "ABC123");                // 0
+        int NewReturn4 = strcmp("ABC123", "ABC");                   // 1
+
+        //int Test = strcmp(nullptr, nullptr);
         int a = 0;
+
+        // strcmp()와 같은 함수
     }
 
     {
-        char Arr[100] = {};
+        char Arr[100] = "aaaaaaaaaaaaaaaaa";
         StringAdd(Arr, "hello", "world");
-        // "cccccddddd"
+
+        // sprintf_s 함수로 같은 기능 사용 가능
+        char ArrTest[100];
+        sprintf_s(ArrTest, "%s%s", "AAAA", "BBBB");
         int a = 0;
     }
 
