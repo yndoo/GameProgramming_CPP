@@ -1,18 +1,10 @@
-﻿#include <iostream>
+﻿#include<Windows.h>
+#include<assert.h>
+
+#define MsgAssert(TEXT) MessageBoxA(nullptr, TEXT, "치명적 에러", MB_OK); assert(false);  // 프로그램을 파괴할 수 있는 함수 Assert
 
 int main()
-{
-    _CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
-    {
-        int Value = 0;
-        int* Ptr = &Value;
-    }
-    {
-        int* Ptr = new int(0);
-    }
-
-    new int(10);
-    //reinterpret_cast<int*>(operator new(sizeof(int))); // new int()의 본모습
-    
+{   
+    MsgAssert("화면 크기가 0입니다.");
     return 0;
 }

@@ -3,6 +3,12 @@
 
 int main()
 {
+    LeakCheck;
     ConsoleScreen NewScreen = ConsoleScreen();
-    NewScreen.Test();
+    NewScreen.CreateScreen(10, 10);
+    while (true) {
+        NewScreen.PrintScreen();
+        Sleep(1000);
+    }
+    NewScreen.ReleaseScreen();
 }
