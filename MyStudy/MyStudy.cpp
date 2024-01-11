@@ -1,28 +1,37 @@
 ﻿#include<iostream>
+#include<vector>
 
-struct Monster {
+class A {
+	//특정 함수에 friend를 걸 수 있다.
+	friend class B;
+private:
+	void TestA() {
+
+	}
+	int Value;
+};
+class B {
 public:
-	Monster(int _Hp, int _Att)
-		: Hp(_Hp), Att(_Att) {
-
+	void Test(A& _Other) {
+		_Other.Value;
+		_Other.TestA();
+	}
+private:
+	int Value;
+	void BFunction(A& _Other) {
+		_Other.Value;
 	}
 
-	void operator-(Monster _Other) {
-		Hp -= _Other.Att;
-	}
-	int Hp;
-	int Att;
 };
 
+class C {
+public:
+	void Test(A& _Other) {
+		//_Other.Value;
+	}
+};
 
 int main()
 {   
-	Monster NewMonster = Monster(200, 10);
-	Monster BadMonster = Monster(200, 20);
-
-	NewMonster - BadMonster;
-
-	std::cout << NewMonster.Hp << std::endl;
-	std::cout << NewMonster.Att << std::endl;
 
 }
