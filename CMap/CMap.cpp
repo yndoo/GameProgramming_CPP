@@ -2,40 +2,35 @@
 #include <map>
 #include <ConsoleEngine/EngineDebug.h>
 
-typedef int KeyType;
-typedef int DataType;
 
-// 루트 노드는 부모가 없다는 것을 기억해야 한다.
-// delete this;
-
+template<typename KeyType, typename ValueType>
 class MyPair
 {
 public:
-	MyPair()
-	{
+	MyPair() {
 
 	}
 
-	MyPair(KeyType _first, DataType _second)
+	MyPair(KeyType _first, ValueType _second)
 		: Key(_first), Value(_second)
 	{
 
 	}
 
 	KeyType Key = KeyType();
-	DataType Value = DataType();
+	ValueType Value = ValueType();
 
 
 };
 
-// template<typename KeyType, typename ValueType>
+template<typename KeyType, typename ValueType>
 class MyMap
 {
 private:
 	class MapNode
 	{
 	public:
-		MyPair Pair;
+		MyPair<KeyType, ValueType> Pair;
 		MapNode* Parent = nullptr;
 		MapNode* LeftChild = nullptr;
 		MapNode* RightChild = nullptr;
@@ -291,6 +286,9 @@ private:
 
 
 public:
+	~MyMap() {
+		lastOrderDeleteLeak();
+	}
 	class iterator
 	{
 		friend MyMap;
@@ -305,7 +303,7 @@ public:
 		{
 		}
 
-		MyPair* operator->()
+		MyPair<KeyType, ValueType>* operator->()
 		{
 			MyPair& MapPair = CurNode->Pair;
 			return &MapPair;
@@ -328,7 +326,7 @@ public:
 
 	// map은 자료가 무작위일때 효율을 발휘합니다.
 	// 자료가 특정 기준으로 이미 정렬된 상태로 들어간다면 대부분 모두다 맵보다 빠르다.
-	void insert(const MyPair& _Value)
+	void insert(const MyPair<KeyType, ValueType>& _Value)
 	{
 		MapNode* NewNode = new MapNode();
 		NewNode->Pair = _Value;
@@ -581,15 +579,15 @@ int main()
 	{
 		std::cout << "내 맵" << std::endl;
 		//      Key   Value
-		MyMap NewMap = MyMap();
+		MyMap<int, int> NewMap = MyMap<int, int>();
 
 		// 오름차순 작은수 => 큰수로 정렬이 됩니다.
-		NewMap.insert(MyPair(10, 0));
-		NewMap.insert(MyPair(5, 0));
-		NewMap.insert(MyPair(15, 0));
-		NewMap.insert(MyPair(12, 99));
-		NewMap.insert(MyPair(3, 0));
-		NewMap.insert(MyPair(7, 0));
+		NewMap.insert(MyPair<int, int>(10, 0));
+		NewMap.insert(MyPair<int, int>(5, 0));
+		NewMap.insert(MyPair<int, int>(15, 0));
+		NewMap.insert(MyPair<int, int>(12, 99));
+		NewMap.insert(MyPair<int, int>(3, 0));
+		NewMap.insert(MyPair<int, int>(7, 0));
 
 		if (true == NewMap.contains(12))
 		{
@@ -611,7 +609,6 @@ int main()
 		std::cout << "last" << std::endl;
 		NewMap.lastOrderPrint();
 
-		NewMap.lastOrderDeleteLeak();
 		//MyMap::iterator StartIter = NewMap.begin();
 		//MyMap::iterator EndIter = NewMap.end();
 
