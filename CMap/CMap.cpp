@@ -369,21 +369,24 @@ public:
 			return Return;
 		}
 
+		// 지울 원소의 다음 노드를 리턴값으로 미리 저장.
 		MapNode* NextNode = _Iter.CurNode->NextNode();
-
 		Return.CurNode = NextNode;
 
-		// 일단 처리되면 끝나면 
+		// 상황 1. 지울 노드가 리프노드라면 바로 지우고 끝나면 된다.
 		if (true == _Iter.CurNode->IsLeaf())
 		{
+			// ParentNode 확인하려고 쓴 코드인듯!?
 			MapNode* ParentNode = _Iter.CurNode->Parent;
+			//  Release()는 부모와의 연을 끊어줌.(?)
 			_Iter.CurNode->Release();
 			delete _Iter.CurNode;
 			return Return;
 		}
 
-		// 교체를 해줘야 한다.
-		// 자식이 하나라도 있는 노드이다.
+		// 이 곳에 도달한 노드는 자식이 하나라도 있는 노드이다.
+		// 상황 2. 자식이 있는 노드는 지우는 것이 끝이 아니고 자식 노드를 올려줘야 한다.
+		// 왼쪽 자식, 오른쪽 자식 상관 없다. RightChild의 minnode나 LeftChild의 maxnode가 오면 된다.
 		MapNode* ChangeNode = nullptr;
 		MapNode* CurNode = _Iter.CurNode;
 
@@ -398,8 +401,10 @@ public:
 			MsgBoxAssert("체인지 노드 에러.");
 			return Return;
 		}
+		// 바꿀 자식 노드와 지울 노드의 연결을 끊는다.
 		ChangeNode->Release();
 
+		// 지울 노드의 왼쪽 오른쪽 자식들을 끊어줌.
 		MapNode* LeftChild = CurNode->LeftChild;
 		MapNode* RightChild = CurNode->RightChild;
 
@@ -413,6 +418,7 @@ public:
 			RightChild->Parent = nullptr;
 		}
 
+		// 바뀌어야 할 ChangeNode와 나의 이전 자식들끼리 연결해준다.
 		if (nullptr != LeftChild)
 		{
 			LeftChild->Parent = ChangeNode;
@@ -430,7 +436,7 @@ public:
 				ChangeNode->RightChild = RightChild;
 			}
 		}
-
+		// ChangeNode에게 내 부모와 서로 연결시키기
 		ChangeNode->Parent = CurNode->Parent;
 		MapNode* Parent = ChangeNode->Parent;
 		if (nullptr != Parent && Parent->LeftChild == CurNode)
