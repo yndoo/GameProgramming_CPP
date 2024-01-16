@@ -24,14 +24,16 @@ void Monster::Update()
 	//	}
 	//}
 
-	AddPos(Dir);
 
 	--Count;
 	if (Count <= 0) {
 		
-		Dir = (Dir == Left) ? Right : Left;
+		Dir.X *= -1;
 		AddPos(Down);
 		Count = 11;
+	}
+	else {
+		AddPos(Dir);
 	}
 
 	ConsoleObject* CollisionObject = Collision(GalagaUpdateType::Bullet);
