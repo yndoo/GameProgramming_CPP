@@ -1,19 +1,37 @@
 ﻿#include <iostream>
-#include <list>
-#include <map>
+
+struct MyStruct {
+	int A;
+	int B;
+};
+
+union MyUnion {
+	int A;
+	char Arr[4];
+};
+
+struct float4 
+{
+	union 
+	{
+		struct 
+		{
+			float X;
+			float Y;
+			float Z;
+			float W;
+		};
+		float Arr1D[4];
+	};
+};
+
+void Test() {
+	static int A = 0;
+	std::cout << ++A << std::endl;
+}
 
 int main() {
-	std::list<int> NewList;
-	for (int Value : NewList) {
-
-	}
-	// 레퍼런스로 수정하고 싶다면
-	for (int& Value : NewList) {
-
-	}
-
-	std::map<int, int> NewMap;
-	for (std::pair<const int, int>& Map : NewMap) {
-
+	while (true) {
+		Test();
 	}
 }
