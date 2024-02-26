@@ -31,7 +31,7 @@ void Test() {
 }
 
 int main() {
-	while (true) {
-		Test();
-	}
+	bool tmp;
+
+	int a = 0;
 }
